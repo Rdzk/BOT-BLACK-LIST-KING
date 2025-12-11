@@ -10,7 +10,20 @@ const { Client, GatewayIntentBits } = require("discord.js");
 const fs = require("fs");
 require("dotenv").config();
 
+// Railway lê a variável normalmente aqui
 const TOKEN = process.env.DISCORD_TOKEN;
+
+// Criar cliente
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
+
+// Login
+client.login(TOKEN);
 
 // --------------------------
 // CARREGAR BANCO DE NOMES
@@ -200,10 +213,10 @@ for (const nome of nomes) {
 // --------------------------
 // LOGIN DO BOT
 // --------------------------
-if (!TOKEN) {
-  console.error("Erro: DISCORD_TOKEN não foi definido no .env!");
-  process.exit(1);
-}
+require("dotenv").config();
+const TOKEN = process.env.DISCORD_TOKEN;
+
+client.login(TOKEN);
 
 client.login(TOKEN);
 
